@@ -91,15 +91,6 @@ cp .env.example .env.local
 npm run dev
 ```
 
-## デプロイ
-
-Vercel プラットフォームへのデプロイをおすすめします：
-
-1. [Vercel](https://vercel.com)でアカウントを作成
-2. このリポジトリをインポート
-3. 環境変数を設定
-4. デプロイを実行
-
 ## 参考リンク
 
 - [Next.js ドキュメント](https://nextjs.org/docs)

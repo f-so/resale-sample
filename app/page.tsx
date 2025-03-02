@@ -1,12 +1,12 @@
 "use client";
 
+import { pricingData } from "@/app/config/pricing";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { pricingData } from "@/app/config/pricing";
 import { TERMS_OF_SERVICE } from "@/constants/terms";
 import Image from "next/image";
 import Link from "next/link";
@@ -136,7 +136,9 @@ export default function Page() {
                   {pricingData.plans.map((plan) => (
                     <th
                       key={plan.id}
-                      className={`p-2 sm:p-4 border-b w-1/3 ${plan.className || ""}`}
+                      className={`p-2 sm:p-4 border-b w-1/3 ${
+                        plan.className || ""
+                      }`}
                     >
                       {plan.name}
                     </th>
@@ -165,9 +167,15 @@ export default function Page() {
                 </tr>
                 {pricingData.features.map((feature) => (
                   <tr key={feature.id}>
-                    <td className="p-2 sm:p-4 border-b" dangerouslySetInnerHTML={{ __html: feature.label }}></td>
+                    <td
+                      className="p-2 sm:p-4 border-b"
+                      dangerouslySetInnerHTML={{ __html: feature.label }}
+                    ></td>
                     {pricingData.plans.map((plan) => (
-                      <td key={plan.id} className="p-2 sm:p-4 border-b text-center">
+                      <td
+                        key={plan.id}
+                        className="p-2 sm:p-4 border-b text-center"
+                      >
                         {plan.features[feature.id]}
                       </td>
                     ))}
@@ -206,7 +214,7 @@ export default function Page() {
                         setIsAgreed(checked as boolean)
                       }
                     />
-                    <Label htmlFor="termsAgree">同意する</Label>
+                    <Label htmlFor="termsAgree" className="cursor-pointer text-lg">同意する</Label>
                   </div>
                 </div>
               </div>
@@ -218,6 +226,20 @@ export default function Page() {
                 登録
               </Button>
             </form>
+          </CardContent>
+        </Card>
+      </section>
+      <section id="contact" className="space-y-8">
+        <h3 className="text-xl sm:text-2xl font-semibold text-center text-blue-900">
+          お問い合わせ先
+        </h3>
+        <Card>
+          <CardContent className="p-4 sm:p-6">
+            <p>下記までご連絡ください。</p>
+            <p>・メール：reuse.paco@gmail.com</p>
+            <p>
+              ・公式LINE：<a href="https://lin.ee/ORf3l7j" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://lin.ee/ORf3l7j</a>
+            </p>
           </CardContent>
         </Card>
       </section>

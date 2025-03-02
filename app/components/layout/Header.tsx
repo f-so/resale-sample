@@ -39,15 +39,15 @@ export default function Header() {
         <div className="flex items-center">
           <a
             href="/"
-            className="text-green-300 font-bold text-sm sm:text-base pr-4"
+            className="text-green-300 font-bold text-sm sm:text-base flex items-center gap-2"
           >
             <img
               src="/resale-paco_logo.png"
               alt="resale-paco"
               className="h-8 w-auto sm:h-10 rounded-lg"
             />
+            <p>Resale-PACO</p>
           </a>
-          <p>Resale-PACO</p>
         </div>
         <div className="md:hidden">
           <Button
@@ -78,21 +78,18 @@ export default function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <a href="#usage" className="text-gray-600 hover:text-green-800">
+          <a href="/#usage" className="text-gray-600 hover:text-green-800">
             ご利用方法
           </a>
-          <a href="#pricing" className="text-gray-600 hover:text-green-800">
+          <a href="/#pricing" className="text-gray-600 hover:text-green-800">
             ご利用料金
           </a>
-          <a href="#register" className="text-gray-600 hover:text-green-800">
+          <a href="/#register" className="text-gray-600 hover:text-green-800">
             新規登録
           </a>
-          {/* <Button
-            variant="outline"
-            className="text-green-800 border-green-800 hover:bg-green-50"
-          >
+          <a href="/#contact" className="text-gray-600 hover:text-green-800">
             お問い合わせ
-          </Button> */}
+          </a>
         </div>
       </nav>
 
@@ -105,32 +102,31 @@ export default function Header() {
       >
         <div className="px-4 py-2 space-y-2 transform transition-transform duration-300 ease-in-out">
           <a
-            href="#usage"
+            href="/#usage"
             className="block py-2 text-gray-600 hover:text-green-800"
             onClick={closeMenu}
           >
             ご利用方法
           </a>
           <a
-            href="#pricing"
+            href="/#pricing"
             className="block py-2 text-gray-600 hover:text-green-800"
             onClick={closeMenu}
           >
             ご利用料金
           </a>
           <a
-            href="#register"
+            href="/#register"
             className="block py-2 text-gray-600 hover:text-green-800"
             onClick={closeMenu}
           >
             新規登録
           </a>
-          {/* <Button
-            variant="outline"
-            className="w-full text-green-800 border-green-800 hover:bg-green-50"
+          <a href="/#contact"
+            className="block py-2 text-gray-600 hover:text-green-800"
           >
             お問い合わせ
-          </Button> */}
+          </a>
         </div>
       </div>
     </header>

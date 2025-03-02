@@ -26,33 +26,8 @@ export default function Page() {
       return;
     }
 
-    if (!email) {
-      alert("メールアドレスを入力してください。");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("Checkout session creation failed");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("決済処理中にエラーが発生しました。");
-    }
+    // 直接Stripeのチェックアウトページに遷移
+    window.location.href = "https://buy.stripe.com/test_6oE5lc6On3rf8hyeUU";
   };
 
   return (
@@ -176,19 +151,6 @@ export default function Page() {
           <CardContent className="p-4 sm:p-6">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="email">
-                    メールアドレス<span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="メールアドレスを入力"
-                  />
-                </div>
                 <div className="space-y-2">
                   <Label htmlFor="terms">
                     利用規約<span className="text-red-500">*</span>

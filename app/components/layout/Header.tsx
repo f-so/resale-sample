@@ -10,8 +10,12 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-10 bg-white border-b">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center">
-          <a href="#" className="text-green-300 font-bold text-sm sm:text-base">
-            サイト名
+          <a href="/" className="text-green-300 font-bold text-sm sm:text-base">
+            <img
+              src="/resale-paco_logo.png"
+              alt="resale-paco"
+              className="h-8 w-auto sm:h-10 rounded-lg"
+            />
           </a>
         </div>
         <div className="md:hidden">

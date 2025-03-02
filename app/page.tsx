@@ -235,7 +235,7 @@ export default function Page() {
         </h3>
         <Card>
           <CardContent className="p-4 sm:p-6">
-            <p>下記までご連絡ください。</p>
+            <p>下記サポート窓口までご連絡ください。</p>
             <p>・メール：reuse.paco@gmail.com</p>
             <p>
               ・公式LINE：<a href="https://lin.ee/ORf3l7j" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://lin.ee/ORf3l7j</a>

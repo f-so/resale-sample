@@ -27,8 +27,11 @@ export default function Page() {
       return;
     }
 
+    // 環境変数からStripeチェックアウトURLを取得
+    const stripeCheckoutUrl = process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL;
+    
     // 直接Stripeのチェックアウトページに遷移
-    window.location.href = "https://buy.stripe.com/test_6oE5lc6On3rf8hyeUU";
+    window.location.href = stripeCheckoutUrl || "";
   };
 
   return (

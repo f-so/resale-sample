@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { pricingData } from "@/app/config/pricing";
 import { TERMS_OF_SERVICE } from "@/constants/terms";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,35 +59,55 @@ export default function Page() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <h3 className="font-medium">1. 利用規約の確認と同意</h3>
-                <p className="text-sm text-gray-600">利用規約をご確認の上、「登録」ボタンをクリックしてください。</p>
+                <p className="text-sm text-gray-600">
+                  利用規約をご確認の上、「登録」ボタンをクリックしてください。
+                </p>
               </div>
-              
+
               <div className="space-y-2">
                 <h3 className="font-medium">2. お支払い情報の登録</h3>
-                <p className="text-sm text-gray-600">メールアドレスを入力してください。</p>
-                <p className="text-sm text-gray-600">クレジットカード情報を入力し、決済を完了してください。</p>
+                <p className="text-sm text-gray-600">
+                  メールアドレスを入力してください。
+                </p>
+                <p className="text-sm text-gray-600">
+                  クレジットカード情報を入力し、決済を完了してください。
+                </p>
               </div>
-              
+
               <div className="space-y-2">
                 <h3 className="font-medium">3. メール確認</h3>
-                <p className="text-sm text-gray-600">登録したメールアドレスに確認メールが届きます。</p>
-                <p className="text-sm text-gray-600">メール内のURLをクリックしてください。</p>
+                <p className="text-sm text-gray-600">
+                  登録したメールアドレスに確認メールが届きます。
+                </p>
+                <p className="text-sm text-gray-600">
+                  メール内のURLをクリックしてください。
+                </p>
               </div>
-              
+
               <div className="space-y-2">
                 <h3 className="font-medium">4. LINE連携</h3>
-                <p className="text-sm text-gray-600">URLから公式LINEアカウントを友だち追加してください。</p>
-                <p className="text-sm text-gray-600">公式LINEに登録したメールアドレスを送信してください。</p>
+                <p className="text-sm text-gray-600">
+                  URLから公式LINEアカウントを友だち追加してください。
+                </p>
+                <p className="text-sm text-gray-600">
+                  公式LINEに登録したメールアドレスを送信してください。
+                </p>
               </div>
-              
+
               <div className="space-y-2">
                 <h3 className="font-medium">5. Discord招待</h3>
-                <p className="text-sm text-gray-600">連携完了後、Discordの招待リンクが届きます。</p>
-                <p className="text-sm text-gray-600">リンクからDiscordコミュニティにご参加ください。</p>
+                <p className="text-sm text-gray-600">
+                  連携完了後、Discordの招待リンクが届きます。
+                </p>
+                <p className="text-sm text-gray-600">
+                  リンクからDiscordコミュニティにご参加ください。
+                </p>
               </div>
             </div>
-            
-            <p className="text-sm text-gray-700 mt-4">ご不明な点がございましたら、お気軽にサポートまでお問い合わせください。</p>            
+
+            <p className="text-sm text-gray-700 mt-4">
+              ご不明な点がございましたら、お気軽にサポートまでお問い合わせください。
+            </p>
             <h2>TODO::通知の確認動画追加</h2>
             <div className="bg-blue-50 p-6 rounded-lg">
               <Image
@@ -112,62 +133,46 @@ export default function Page() {
               <thead>
                 <tr>
                   <th className="p-2 sm:p-4 border-b w-1/3"></th>
-                  <th className="p-2 sm:p-4 border-b w-1/3 text-blue-500">
-                    スタンダード
-                  </th>
-                  <th className="p-2 sm:p-4 border-b w-1/3 text-orange-500">
-                    プレミアム
-                  </th>
+                  {pricingData.plans.map((plan) => (
+                    <th
+                      key={plan.id}
+                      className={`p-2 sm:p-4 border-b w-1/3 ${plan.className || ""}`}
+                    >
+                      {plan.name}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className="p-2 sm:p-4 border-b">料金</td>
-                  <td className="p-2 sm:p-4 border-b text-center">
-                    <span className="whitespace-nowrap">1,480円</span>
-                    <br />
-                    <span className="text-xs sm:text-sm text-gray-500">
-                      (税込)
-                    </span>
-                  </td>
-                  <td className="p-2 sm:p-4 border-b text-center">
-                    <span className="whitespace-nowrap">3,980円</span>
-                    <br />
-                    <span className="text-xs sm:text-sm text-gray-500">
-                      (税込)
-                    </span>
-                  </td>
+                  {pricingData.plans.map((plan) => (
+                    <td
+                      key={plan.id}
+                      className="p-2 sm:p-4 border-b text-center"
+                    >
+                      <span className="whitespace-nowrap">{plan.price}</span>
+                      {plan.priceNote && (
+                        <>
+                          <br />
+                          <span className="text-xs sm:text-sm text-gray-500">
+                            {plan.priceNote}
+                          </span>
+                        </>
+                      )}
+                    </td>
+                  ))}
                 </tr>
-                <tr>
-                  <td className="p-2 sm:p-4 border-b">
-                    新着更新LINE通知
-                    <br />
-                    セカスト/トレファクFASHION/トレファクONLINE/オフモール
-                  </td>
-                  <td className="p-2 sm:p-4 border-b text-center">○</td>
-                  <td className="p-2 sm:p-4 border-b text-center">○</td>
-                </tr>
-                <tr>
-                  <td className="p-2 sm:p-4 border-b">LINE通知「件数」設定</td>
-                  <td className="p-2 sm:p-4 border-b text-center">○</td>
-                  <td className="p-2 sm:p-4 border-b text-center">○</td>
-                </tr>
-                <tr>
-                  <td className="p-2 sm:p-4 border-b">
-                    新着更新LINE通知「URL機能」
-                  </td>
-                  <td className="p-2 sm:p-4 border-b text-center">×</td>
-                  <td className="p-2 sm:p-4 border-b text-center">○</td>
-                </tr>
-                <tr>
-                  <td className="p-2 sm:p-4 border-b">
-                    新着更新LINE通知「希望ショップ」
-                    <br />
-                    セカスト/トレファクFASHION/トレファクONLINE/オフモール以外のショップ
-                  </td>
-                  <td className="p-2 sm:p-4 border-b text-center">×</td>
-                  <td className="p-2 sm:p-4 border-b text-center">○</td>
-                </tr>
+                {pricingData.features.map((feature) => (
+                  <tr key={feature.id}>
+                    <td className="p-2 sm:p-4 border-b" dangerouslySetInnerHTML={{ __html: feature.label }}></td>
+                    {pricingData.plans.map((plan) => (
+                      <td key={plan.id} className="p-2 sm:p-4 border-b text-center">
+                        {plan.features[feature.id]}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

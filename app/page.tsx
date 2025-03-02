@@ -35,27 +35,59 @@ export default function Page() {
       {/* Hero Section */}
       <section className="text-center space-y-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-          利益の出る商品を仕入れる。
+          オンライン仕入れサポートツール Resale-PACO
         </h1>
         <h2 className="text-xl sm:text-2xl text-gray-900">
           せどり必須ツール。
         </h2>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-          resale-pacoでは、仕入れ先のオンラインショップの新着商品が更新されたら、他の人より早くアクセスして仕入れることは出来いません。
+          resale-pacoでは、仕入れ先のオンラインショップの新着商品が更新されたら、他の人より早くアクセスして仕入れる事ができます。
         </p>
       </section>
 
       {/* Tool Section */}
-      <section className="space-y-8">
+      <section id="usage" className="space-y-8">
         <h3 className="text-xl sm:text-2xl font-semibold text-center text-blue-900">
-          オンライン仕入れサポートツール
+          ご利用方法
         </h3>
         <Card className="border-[10px] border-green-300 rounded-[40px]">
           <CardContent className="p-6 space-y-4">
             <h2 className="text-lg font-medium text-gray-900">
-              説明文追加〜〜
+              サービス登録の流れ
             </h2>
-            <p className="text-green-800">LINEで通知。</p>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="font-medium">1. 利用規約の確認と同意</h3>
+                <p className="text-sm text-gray-600">利用規約をご確認の上、「登録」ボタンをクリックしてください。</p>
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="font-medium">2. お支払い情報の登録</h3>
+                <p className="text-sm text-gray-600">メールアドレスを入力してください。</p>
+                <p className="text-sm text-gray-600">クレジットカード情報を入力し、決済を完了してください。</p>
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="font-medium">3. メール確認</h3>
+                <p className="text-sm text-gray-600">登録したメールアドレスに確認メールが届きます。</p>
+                <p className="text-sm text-gray-600">メール内のURLをクリックしてください。</p>
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="font-medium">4. LINE連携</h3>
+                <p className="text-sm text-gray-600">URLから公式LINEアカウントを友だち追加してください。</p>
+                <p className="text-sm text-gray-600">公式LINEに登録したメールアドレスを送信してください。</p>
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="font-medium">5. Discord招待</h3>
+                <p className="text-sm text-gray-600">連携完了後、Discordの招待リンクが届きます。</p>
+                <p className="text-sm text-gray-600">リンクからDiscordコミュニティにご参加ください。</p>
+              </div>
+            </div>
+            
+            <p className="text-sm text-gray-700 mt-4">ご不明な点がございましたら、お気軽にサポートまでお問い合わせください。</p>            
+            <h2>TODO::通知の確認動画追加</h2>
             <div className="bg-blue-50 p-6 rounded-lg">
               <Image
                 src="/placeholder.svg"
@@ -70,7 +102,7 @@ export default function Page() {
       </section>
 
       {/* Pricing Table Section */}
-      <section className="space-y-8">
+      <section id="pricing" className="space-y-8">
         <h3 className="text-xl sm:text-2xl font-semibold text-center text-blue-900">
           ご利用料金
         </h3>
@@ -143,7 +175,7 @@ export default function Page() {
       </section>
 
       {/* Registration Form Section */}
-      <section className="space-y-8">
+      <section id="register" className="space-y-8">
         <h3 className="text-xl sm:text-2xl font-semibold text-center text-blue-900">
           新規登録
         </h3>

@@ -13,6 +13,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+// 型定義を追加
+type FeatureId = 'sekasuto' | 'other_shops' | 'search_tool';
+
 export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
@@ -114,7 +117,7 @@ export default function Page() {
             <h2>TODO::通知の確認動画追加</h2>
             <div className="bg-blue-50 p-6 rounded-lg">
               <Image
-                src="/placeholder.svg"
+                src="/favicon.ico"
                 alt="LINE notification example"
                 width={300}
                 height={200}
@@ -179,7 +182,9 @@ export default function Page() {
                         key={plan.id}
                         className="p-2 sm:p-4 border-b text-center"
                       >
-                        {plan.features[feature.id]}
+                        {Object.keys(plan.features).includes(feature.id) 
+                          ? plan.features[feature.id as keyof typeof plan.features]
+                          : '未対応'}
                       </td>
                     ))}
                   </tr>

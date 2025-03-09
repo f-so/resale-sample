@@ -12,6 +12,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -111,15 +118,51 @@ export default function Page() {
             <p className="text-sm text-gray-700 mt-4">
               ご不明な点がございましたら、お気軽にサポートまでお問い合わせください。
             </p>
-            <h2>TODO::通知の確認動画追加</h2>
             <div className="bg-blue-50 p-6 rounded-lg">
-              <Image
-                src="/favicon.ico"
-                alt="LINE notification example"
-                width={300}
-                height={200}
-                className="mx-auto"
-              />
+              <Carousel className="w-full max-w-xs mx-auto">
+                <CarouselContent>
+                  <CarouselItem>
+                    <Image
+                      src="/registSample/regist1.png"
+                      alt="通知例 1"
+                      width={300}
+                      height={300}
+                      className="mx-auto"
+                    />
+                  </CarouselItem>
+                  <CarouselItem>
+                    <Image
+                      src="/registSample/regist2.png"
+                      alt="通知例 2"
+                      width={300}
+                      height={300}
+                      className="mx-auto"
+                    />
+                  </CarouselItem>
+                  <CarouselItem>
+                    <Image
+                      src="/registSample/regist3.png"
+                      alt="通知例 3"
+                      width={300}
+                      height={300}
+                      className="mx-auto"
+                    />
+                  </CarouselItem>
+                  {/* TODO:縦長になるため修正する */}
+                  {/* <CarouselItem>
+                    <Image
+                      src="/registSample/regist4.png"
+                      alt="通知例 4"
+                      width={300}
+                      height={200}
+                      className="mx-auto"
+                    />
+                  </CarouselItem> */}
+                  {/* 必要に応じて追加の画像をここに追加できます */}
+                </CarouselContent>
+                <CarouselPrevious className="left-0" />
+                <CarouselNext className="right-0" />
+              </Carousel>
             </div>
           </CardContent>
         </Card>

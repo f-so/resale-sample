@@ -13,9 +13,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-// 型定義を追加
-type FeatureId = 'sekasuto' | 'other_shops' | 'search_tool';
-
 export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);

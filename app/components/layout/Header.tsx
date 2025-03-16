@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
+import Image from 'next/image';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,10 +42,12 @@ export default function Header() {
             href="/"
             className="text-green-300 font-bold text-sm sm:text-base flex items-center gap-2"
           >
-            <img
+            <Image 
               src="/resale-paco_logo.png"
               alt="resale-paco"
-              className="h-8 w-auto sm:h-10 rounded-lg"
+              width={100}
+              height={50}
+              priority
             />
             <p>Resale-PACO</p>
           </a>

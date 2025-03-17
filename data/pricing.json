@@ -1,0 +1,36 @@
+{
+  "headers": [
+    { "id": "feature", "label": "" },
+    {
+      "id": "standard",
+      "label": "スタンダードプラン",
+      "className": "text-blue-500"
+    },
+    {
+      "id": "premium",
+      "label": "プレミアムプラン（準備中）",
+      "className": "text-red-500"
+    }
+  ],
+  "rows": [
+    {
+      "feature": "料金",
+      "values": [
+        { "value": "2,0000円", "subtext": "(税込)" },
+        { "value": "4,000円(予定)", "subtext": "(税込)" }
+      ]
+    },
+    {
+      "feature": "新着通知：セカストオンライン",
+      "values": [{ "value": "○" }, { "value": "◯" }]
+    },
+    {
+      "feature": "新着通知：ベクトルパーク、カインドオル、オフハウス、レクロ、ブランドオフ、トレファク、高山質店、買取王国",
+      "values": [{ "value": "×" }, { "value": "○" }]
+    },
+    {
+      "feature": "各サイト一括検索ツール",
+      "values": [{ "value": "×" }, { "value": "○" }]
+    }
+  ]
+}

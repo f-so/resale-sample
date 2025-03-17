@@ -80,3 +80,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem; /* ヘッダーの高さに合わせて調整 */
+}

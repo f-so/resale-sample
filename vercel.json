@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1",
+      "continue": true
+    }
+  ],
+  "github": {
+    "silent": true
+  },
+  "protection": {
+    "pathPrefix": [
+      "/"
+    ],
+    "except": [
+      "/api",
+      "/api/(.*)",
+      "/api/healthcheck",
+      "/api/webhook-test",
+      "/api/webhook",
+      "/api/public-health",
+      "/api/webhook-public"
+    ]
+  }
+} 

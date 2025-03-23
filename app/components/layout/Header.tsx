@@ -35,7 +35,7 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-10 bg-white border-b">
+    <header className="fixed top-0 left-0 right-0 z-10 bg-white border-b shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center">
           <a
@@ -81,17 +81,20 @@ export default function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <a href="/#usage" className="text-gray-600 hover:text-green-800">
+          <a href="#features" className="text-gray-600 hover:text-green-800">
+            特徴
+          </a>
+          <a href="#pricing" className="text-gray-600 hover:text-green-800">
+            料金プラン
+          </a>
+          <a href="#usage" className="text-gray-600 hover:text-green-800">
             ご利用方法
           </a>
-          <a href="/#pricing" className="text-gray-600 hover:text-green-800">
-            ご利用料金
+          <a href="#faq" className="text-gray-600 hover:text-green-800">
+            よくある質問
           </a>
-          <a href="/#register" className="text-gray-600 hover:text-green-800">
+          <a href="#register" className="text-gray-600 hover:text-green-800">
             新規登録
-          </a>
-          <a href="/#contact" className="text-gray-600 hover:text-green-800">
-            お問い合わせ
           </a>
         </div>
       </nav>
@@ -105,30 +108,39 @@ export default function Header() {
       >
         <div className="px-4 py-2 space-y-2 transform transition-transform duration-300 ease-in-out">
           <a
-            href="/#usage"
+            href="#features"
+            className="block py-2 text-gray-600 hover:text-green-800"
+            onClick={closeMenu}
+          >
+            特徴
+          </a>
+          <a
+            href="#pricing"
+            className="block py-2 text-gray-600 hover:text-green-800"
+            onClick={closeMenu}
+          >
+            料金プラン
+          </a>
+          <a
+            href="#usage"
             className="block py-2 text-gray-600 hover:text-green-800"
             onClick={closeMenu}
           >
             ご利用方法
           </a>
           <a
-            href="/#pricing"
+            href="#faq"
             className="block py-2 text-gray-600 hover:text-green-800"
             onClick={closeMenu}
           >
-            ご利用料金
+            よくある質問
           </a>
           <a
-            href="/#register"
+            href="#register"
             className="block py-2 text-gray-600 hover:text-green-800"
             onClick={closeMenu}
           >
             新規登録
-          </a>
-          <a href="/#contact"
-            className="block py-2 text-gray-600 hover:text-green-800"
-          >
-            お問い合わせ
           </a>
         </div>
       </div>

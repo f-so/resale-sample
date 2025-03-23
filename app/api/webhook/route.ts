@@ -4,29 +4,45 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 // raw-bodyを使用してリクエストボディを取得
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2025-02-24.acacia",
 });
 
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
 export async function POST(req: Request) {
   try {
     // リクエストの詳細をログ出力
     console.log("Webhook received - Processing started");
 
+    // 環境変数チェック
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error("STRIPE_SECRET_KEY is not set");
+      return NextResponse.json(
+        { error: "Stripe configuration error" },
+        { status: 500 }
+      );
+    }
+
+    if (!endpointSecret) {
+      console.error("STRIPE_WEBHOOK_SECRET is not set");
+      return NextResponse.json(
+        { error: "Webhook configuration error" },
+        { status: 500 }
+      );
+    }
+
     // リクエストボディを取得
     const body = await req.text();
 
     // ヘッダーを取得
-    const headersList = await headers();
+    const headersList = headers();
     const sig = headersList.get("stripe-signature");
 
     let event: Stripe.Event;
 
     try {
       if (!sig) throw new Error("No signature");
-      if (!endpointSecret) throw new Error("No endpoint secret");
 
       // 署名を検証
       event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
@@ -40,10 +56,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // console.log(`Received event: ${event.id} of type ${event.type}`);
-    // console.log("Event data:", JSON.stringify(event.data.object, null, 2));
-
+    // イベント処理
     try {
+      console.log(`Received event: ${event.id} of type ${event.type}`);
+
       switch (event.type) {
         case "checkout.session.completed": {
           const session = event.data.object as Stripe.Checkout.Session;
@@ -54,11 +70,24 @@ export async function POST(req: Request) {
             metadata: session.metadata,
           });
 
+          // メール送信前のSMTP設定チェック
+          if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+            console.error("SMTP environment variables are not properly set");
+            return NextResponse.json(
+              { error: "Email service configuration error" },
+              { status: 500 }
+            );
+          }
+
           try {
             await sendEmail(session);
+            console.log("Email sent successfully");
           } catch (error) {
             console.error("sendEmail failed:", error);
-            throw error;
+            return NextResponse.json(
+              { error: "Failed to send email notification" },
+              { status: 500 }
+            );
           }
           break;
         }
@@ -95,7 +124,6 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-  console.log("post-complete")
 }
 
 async function sendEmail(session: Stripe.Checkout.Session) {
@@ -118,5 +146,4 @@ async function sendEmail(session: Stripe.Checkout.Session) {
     console.error("Failed to send welcome email:", error);
     throw error;
   }
-  console.log("finish-sendEmail")
 }

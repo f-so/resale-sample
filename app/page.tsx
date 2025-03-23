@@ -67,7 +67,7 @@ export default function Page() {
           {/* ヒーローセクション */}
           <section className="text-center space-y-6 py-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              オンライン仕入れサポートツール <span className="text-blue-600">Resale-PACO</span>
+              オンライン仕入れサポートツール <span className="text-blue-600">Resale-PACO-1037</span>
             </h1>
             <h2 className="text-2xl md:text-3xl text-gray-800">
               せどり必須ツール。

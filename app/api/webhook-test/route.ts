@@ -1,46 +1,6 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-// GETリクエスト用のハンドラを追加
-export async function GET() {
-  try {
-    return NextResponse.json({
-      status: "success",
-      message: "Webhook test endpoint is accessible via GET",
-      timestamp: new Date().toISOString()
-    }, { 
-      status: 200,
-      // CORSヘッダーを設定
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-      }
-    });
-  } catch (err) {
-    console.error("Webhook test GET error:", err);
-    return NextResponse.json(
-      { 
-        status: "error",
-        message: err instanceof Error ? err.message : "Unknown error"
-      },
-      { status: 500 }
-    );
-  }
-}
-
-// OPTIONSリクエストに対応するハンドラ（CORS対応）
-export async function OPTIONS() {
-  return NextResponse.json({}, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-    }
-  });
-}
-
 export async function POST(req: Request) {
   try {
     // リクエストの詳細をログ出力
@@ -66,15 +26,7 @@ export async function POST(req: Request) {
       stripeSignaturePreview: stripeSignature 
         ? stripeSignature.substring(0, 20) + "..." 
         : "Not present"
-    }, { 
-      status: 200,
-      // CORSヘッダーを設定
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-      }
-    });
+    }, { status: 200 });
   } catch (err) {
     console.error("Webhook test error:", err);
     return NextResponse.json(

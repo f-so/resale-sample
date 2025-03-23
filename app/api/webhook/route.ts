@@ -3,18 +3,6 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-// OPTIONSリクエストに対応するハンドラ（CORS対応）
-export async function OPTIONS() {
-  return NextResponse.json({}, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-    }
-  });
-}
-
 // raw-bodyを使用してリクエストボディを取得
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-02-24.acacia",
@@ -29,26 +17,16 @@ export async function POST(req: Request) {
 
     // リクエストボディを取得
     const body = await req.text();
-    
-    // デバッグ用にリクエストボディの一部をログ出力
-    console.log("Request body (first 100 chars):", body.substring(0, 100));
 
     // ヘッダーを取得
-    const headersList = headers();
+    const headersList = await headers();
     const sig = headersList.get("stripe-signature");
-    
-    // デバッグ用にすべてのヘッダーをログ出力
-    console.log("All headers:", Object.fromEntries(headersList.entries()));
-    console.log("Stripe signature header:", sig);
 
     let event: Stripe.Event;
 
     try {
       if (!sig) throw new Error("No signature");
       if (!endpointSecret) throw new Error("No endpoint secret");
-
-      // エンドポイントシークレットをログ出力（セキュリティ上の理由から一部のみ）
-      console.log("Using endpoint secret starting with:", endpointSecret.substring(0, 5) + "...");
 
       // 署名を検証
       event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
@@ -58,14 +36,7 @@ export async function POST(req: Request) {
       console.error("Webhook signature verification failed:", err.message);
       return NextResponse.json(
         { error: `Webhook Error: ${err.message}` },
-        { 
-          status: 400,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-          } 
-        }
+        { status: 400 }
       );
     }
 
@@ -112,39 +83,16 @@ export async function POST(req: Request) {
       // 500エラーを返す
       return NextResponse.json(
         { error: "Internal server error" },
-        { 
-          status: 500,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-          }
-        }
+        { status: 500 }
       );
     }
 
-    return NextResponse.json(
-      { received: true },
-      { 
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-        }
-      }
-    );
+    return NextResponse.json({ received: true });
   } catch (err) {
     console.error("Unexpected error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
-      { 
-        status: 500,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, stripe-signature'
-        }
-      }
+      { status: 500 }
     );
   }
   console.log("post-complete")

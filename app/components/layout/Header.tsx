@@ -1,21 +1,60 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from 'next/image';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // メニュー項目クリック時にメニューを閉じる関数
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // メニュー外クリック時にメニューを閉じる処理
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-10 bg-white border-b">
+    <header className="fixed top-0 left-0 right-0 z-10 bg-white border-b shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center">
-          <a href="#" className="text-green-300 font-bold text-sm sm:text-base">
-            サイト名
+          <a
+            href="/"
+            className="text-green-300 font-bold text-sm sm:text-base flex items-center gap-2"
+          >
+            <Image 
+              src="/resale-paco_logo.png"
+              alt="resale-paco"
+              width={100}
+              height={50}
+              priority
+            />
+            <p>Resale-PACO</p>
           </a>
         </div>
         <div className="md:hidden">
           <Button
+            ref={buttonRef}
             variant="ghost"
             className="p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -41,49 +80,70 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* 現状ページがないため非表示 */}
-        {/* <div className="hidden md:flex items-center gap-4">
-          <a href="#" className="text-gray-600 hover:text-green-800">
-            ホーム
+        <div className="hidden md:flex items-center gap-4">
+          <a href="#features" className="text-gray-600 hover:text-green-800">
+            特徴
           </a>
-          <a href="#" className="text-gray-600 hover:text-green-800">
-            せどり支援ツール
+          <a href="#pricing" className="text-gray-600 hover:text-green-800">
+            料金プラン
           </a>
-          <a href="#" className="text-gray-600 hover:text-green-800">
-            お知らせ
+          <a href="#usage" className="text-gray-600 hover:text-green-800">
+            ご利用方法
           </a>
-          <Button
-            variant="outline"
-            className="text-green-800 border-green-800 hover:bg-green-50"
-          >
-            お問い合わせ
-          </Button>
-        </div> */}
+          <a href="#faq" className="text-gray-600 hover:text-green-800">
+            よくある質問
+          </a>
+          <a href="#register" className="text-gray-600 hover:text-green-800">
+            新規登録
+          </a>
+        </div>
       </nav>
 
       {/* モバイルメニュー */}
-      {/* 現状ページがないため非表示 */}
-      {/* {isMenuOpen && (
-        <div className="md:hidden bg-white border-t">
-          <div className="px-4 py-2 space-y-2">
-            <a href="#" className="block py-2 text-gray-600 hover:text-green-800">
-              ホーム
-            </a>
-            <a href="#" className="block py-2 text-gray-600 hover:text-green-800">
-              せどり支援ツール
-            </a>
-            <a href="#" className="block py-2 text-gray-600 hover:text-green-800">
-              お知らせ
-            </a>
-            <Button
-              variant="outline"
-              className="w-full text-green-800 border-green-800 hover:bg-green-50"
-            >
-              お問い合わせ
-            </Button>
-          </div>
+      <div
+        ref={menuRef}
+        className={`md:hidden bg-white border-t overflow-hidden transition-all duration-300 ease-in-out ${
+          isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-4 py-2 space-y-2 transform transition-transform duration-300 ease-in-out">
+          <a
+            href="#features"
+            className="block py-2 text-gray-600 hover:text-green-800"
+            onClick={closeMenu}
+          >
+            特徴
+          </a>
+          <a
+            href="#pricing"
+            className="block py-2 text-gray-600 hover:text-green-800"
+            onClick={closeMenu}
+          >
+            料金プラン
+          </a>
+          <a
+            href="#usage"
+            className="block py-2 text-gray-600 hover:text-green-800"
+            onClick={closeMenu}
+          >
+            ご利用方法
+          </a>
+          <a
+            href="#faq"
+            className="block py-2 text-gray-600 hover:text-green-800"
+            onClick={closeMenu}
+          >
+            よくある質問
+          </a>
+          <a
+            href="#register"
+            className="block py-2 text-gray-600 hover:text-green-800"
+            onClick={closeMenu}
+          >
+            新規登録
+          </a>
         </div>
-      )} */}
+      </div>
     </header>
   );
 }

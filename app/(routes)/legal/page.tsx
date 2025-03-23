@@ -4,7 +4,7 @@ export default function LegalPage() {
   return (
     <div className="space-y-8">
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-        {legalInfo.title}
+        特定商取引法に基づく表記
       </h1>
 
       <div className="space-y-8">
